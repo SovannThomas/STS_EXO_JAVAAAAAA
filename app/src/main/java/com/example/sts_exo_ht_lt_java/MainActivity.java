@@ -96,9 +96,10 @@ public class MainActivity extends AppCompatActivity {
     //explication: on prend n qui est le nombre max voulu et on essaye toutes les divisions
     //Possible de 2 jusqu'à n. Si l'une des divisions ne retourne aucun reste(donc est vrai)
     //Alors on renvoie false. à la fin de toutes les divisions, ce nombre qui n'a pas pu se
-    //Faire diviser est alors prime. Retourne true
+    //Faire diviser est alors prime. Retourne true. On a juste besoin de calculer jusq'a la
+    //moitié
     private boolean isPrime(int n) {
-        for (int i = 2; i < n; i++) {
+        for (int i = 2; i < n/2; i++) {
             if (n % i == 0) {
                 return false;
             }
