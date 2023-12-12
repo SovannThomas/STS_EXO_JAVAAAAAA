@@ -25,6 +25,11 @@ public class MainActivity extends AppCompatActivity {
     private ListView listView;
     private TextView calculatedNumber;
 
+    private TextView calculatedTime;
+
+    private long startTime;
+    private long endTime;
+
     private List<Integer> ListNombrePremier;
     private ArrayAdapter<Integer> adapter;
 
@@ -39,6 +44,8 @@ public class MainActivity extends AppCompatActivity {
         textNumber = findViewById(R.id.text_number);
         listView = findViewById(R.id.listMatView);
         calculatedNumber = findViewById(R.id.calculatedNumber);
+        calculatedTime = findViewById(R.id.calculatedTime);
+
 
         ListNombrePremier = new ArrayList<>();
         adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, ListNombrePremier);
@@ -64,16 +71,24 @@ public class MainActivity extends AppCompatActivity {
 
         //S'occupe du calcul en arriere plan
         protected List<Integer> doInBackground(Integer... params) {
+            startTime = System.currentTimeMillis();
             return calculatePrimes(params[0]);
         }
 
         //s'occupe de l'affichage en temps réel des nombres premiers
         protected void onPostExecute(List<Integer> NombrePremierCalcule) {
+            endTime = System.currentTimeMillis();
+
+            // Calcul du temps écoulé en millisecondes
+            long totalTime = endTime - startTime;
+
+            // Affichage du temps de calcul en millisecondes
+            calculatedTime.setText("Temps de calcul : " + totalTime + "ms");
 
             ListNombrePremier.clear();
             ListNombrePremier.addAll(NombrePremierCalcule);
             adapter.notifyDataSetChanged();
-            calculatedNumber.setText("Nombre de nombres premiers calculés : " + NombrePremierCalcule.size());
+            calculatedNumber.setText("nombre de premier total : " + NombrePremierCalcule.size());
         }
     }
 

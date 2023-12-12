@@ -9,6 +9,7 @@
 
     <EditText
         android:id="@+id/text_number"
+        android:inputType="number"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -34,11 +35,26 @@
         android:id="@+id/calculatedNumber"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="nombre de chiffre premier calculé"
+        android:layout_marginBottom="5dp"
+        android:text="nombre de premier total :"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+
         app:layout_constraintStart_toStartOf="parent"
+
         app:layout_constraintTop_toBottomOf="@+id/listMatView" />
+
+    <TextView
+        android:id="@+id/calculatedTime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Temps de calcul :"
+        app:layout_constraintBottom_toTopOf="@+id/calculatedNumber"
+        app:layout_constraintEnd_toEndOf="parent"
+
+
+        app:layout_constraintStart_toStartOf="parent"
+         app:layout_constraintVertical_bias="0.687" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
