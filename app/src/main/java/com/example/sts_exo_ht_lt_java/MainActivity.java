@@ -94,16 +94,18 @@ public class MainActivity extends AppCompatActivity {
 
     //Fonction qui calcul les nombres premiers
     private void calculatePrimeNumbers() {
-        String Nombre = textNumber.getText().toString();
+        String numberStr = textNumber.getText().toString();
 
-        if (!Nombre.isEmpty()) {
-            int maxNumber = Integer.parseInt(Nombre);
-            new PrimeNumbersTask().execute(maxNumber);
-        } else {
-            //Clear sinon en mettant rien ca ne remet pas à 0
-            ListNombrePremier.clear();
-            adapter.notifyDataSetChanged();
-            calculatedNumber.setText("Nombre de nombres premiers calculés : 0");
+        if (!numberStr.isEmpty()) {
+            int maxNumber = Integer.parseInt(numberStr);
+            if (maxNumber > 1) {
+                new PrimeNumbersTask().execute(maxNumber);
+            } else {
+                ListNombrePremier.clear();
+                adapter.notifyDataSetChanged();
+                calculatedNumber.setText("Nombre de nombres premiers calculés : 0");
+                calculatedTime.setText("Temps de calcul : 0 ms");
+            }
         }
     }
 
@@ -113,8 +115,13 @@ public class MainActivity extends AppCompatActivity {
     //Alors on renvoie false. à la fin de toutes les divisions, ce nombre qui n'a pas pu se
     //Faire diviser est alors prime. Retourne true. On a juste besoin de calculer jusq'a la
     //moitié
+
+
     private boolean isPrime(int n) {
-        for (int i = 2; i < n/2; i++) {
+        if (n <= 1) {
+            return false;
+        }
+        for (int i = 2; i <= Math.sqrt(n); i++) {
             if (n % i == 0) {
                 return false;
             }
